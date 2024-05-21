@@ -1,4 +1,5 @@
 /* < --- SINGLE CARD JS --- >*/
+import { initialCards } from "./list-of-cards.js";
 import { cardTemplate } from "../index.js";
 import { popupTypeImage } from "../index.js";
 import { popupTypeImageImage } from "../index.js";
@@ -9,6 +10,8 @@ import { popupTypeNewCard } from "../index.js";
 import { popupInputNewCardName } from "../index.js";
 import { popupInputNewCardUrl } from "../index.js";
 import { placesList } from "../index.js";
+
+/* < --- BUILD CARD JS --- >*/
 
 export function buildCard(item, deleteFunction, likeFunction, openFunction) {
   const newCardFromTemplate = cardTemplate
@@ -27,12 +30,25 @@ export function buildCard(item, deleteFunction, likeFunction, openFunction) {
   cardDeleteButton.addEventListener("click", () =>
     deleteFunction(newCardFromTemplate)
   );
-  cardLikeButton.addEventListener("click", () =>
-    likeFunction(newCardFromTemplate)
-  );
-  cardImage.addEventListener("click", () => openFunction(newCardFromTemplate));
+  cardLikeButton.addEventListener("click", () => likeFunction(event));
+  cardImage.addEventListener("click", () => openFunction(item));
 
   return newCardFromTemplate;
+}
+
+/* < --- ADD NEW CARD JS --- >*/
+export function addCard(event) {
+  event.preventDefault();
+  const cardName = popupInputNewCardName.value;
+  const cardLink = popupInputNewCardUrl.value;
+  buildTemplateCard({ name: cardName, link: cardLink });
+  event.target.reset();
+  closePopup(popupTypeNewCard);
+}
+
+export function buildTemplateCard(item) {
+  const newCard = buildCard(item);
+  placesList.prepend(newCard);
 }
 
 /* < --- DELETE CARD JS --- >*/
@@ -47,23 +63,9 @@ export function runCardLikeButton(event) {
 }
 
 /* < --- OPEN IMAGE POPUP JS --- >*/
-export function runOpenImage(cardData) {
-  popupTypeImageImage.src = cardData.src;
-  popupTypeImageImage.alt = cardData.alt;
-  popupTypeImageCaption.textContent = cardData.alt;
+export function runOpenImage(item) {
+  popupTypeImageImage.src = item.link;
+  popupTypeImageImage.alt = item.name;
+  popupTypeImageCaption.textContent = item.name;
   openPopup(popupTypeImage);
-}
-
-/* < --- ADD NEW CARD JS --- >*/
-export function buildTemplateCard(data) {
-  const newCard = buildCard(data);
-  placesList.prepend(newCard);
-}
-
-export function addCard(event) {
-  event.preventDefault();
-  const cardName = popupInputNewCardName.value;
-  const cardLink = popupInputNewCardUrl.value;
-  buildTemplateCard({ name: cardName, link: cardLink });
-  closePopup(popupTypeNewCard);
 }

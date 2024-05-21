@@ -64,7 +64,7 @@ export const popupTypeImageContent =
 export const popupTypeImageImage =
   popupTypeImageContent.querySelector(".popup__image");
 export const popupTypeImageCaption =
-  popupTypeImage.querySelector(".popup__caption");
+  popupTypeImageContent.querySelector(".popup__caption");
 
 /* < --- VARIABLES LOCAL JS --- >*/
 export const placesList = document.querySelector(".places__list");
