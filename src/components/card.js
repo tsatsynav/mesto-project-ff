@@ -47,7 +47,12 @@ export function addCard(event) {
 }
 
 export function buildTemplateCard(item) {
-  const newCard = buildCard(item);
+  const newCard = buildCard(
+    item,
+    runDeleteButton,
+    runCardLikeButton,
+    runOpenImage
+  );
   placesList.prepend(newCard);
 }
 
