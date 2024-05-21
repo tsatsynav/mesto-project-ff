@@ -1,5 +1,4 @@
-/* < --- SINGLE CARD JS --- >*/
-import { initialCards } from "./list-of-cards.js";
+/* < --- IMPORT JS --- >*/
 import { cardTemplate } from "../index.js";
 import { popupTypeImage } from "../index.js";
 import { popupTypeImageImage } from "../index.js";
@@ -11,8 +10,9 @@ import { popupInputNewCardName } from "../index.js";
 import { popupInputNewCardUrl } from "../index.js";
 import { placesList } from "../index.js";
 
-/* < --- BUILD CARD JS --- >*/
+// -----------------------------------------------------------------------------------
 
+/* < --- BUILD CARD --- >*/
 export function buildCard(item, deleteFunction, likeFunction, openFunction) {
   const newCardFromTemplate = cardTemplate
     .querySelector(".card")
@@ -36,7 +36,28 @@ export function buildCard(item, deleteFunction, likeFunction, openFunction) {
   return newCardFromTemplate;
 }
 
-/* < --- ADD NEW CARD JS --- >*/
+/* < --- DELETE CARD --- >*/
+export function runDeleteButton(item) {
+  item.remove();
+}
+
+/* < --- LIKE CARD --- >*/
+export function runCardLikeButton(event) {
+  const runButton = event.target;
+  runButton.classList.toggle("card__like-button_is-active");
+}
+
+/* < --- OPEN IMAGE POPUP --- >*/
+export function runOpenImage(item) {
+  popupTypeImageImage.src = item.link;
+  popupTypeImageImage.alt = item.name;
+  popupTypeImageCaption.textContent = item.name;
+  openPopup(popupTypeImage);
+}
+
+// -----------------------------------------------------------------------------------
+
+/* < --- ADD NEW CARD --- >*/
 export function addCard(event) {
   event.preventDefault();
   const cardName = popupInputNewCardName.value;
@@ -54,23 +75,4 @@ export function buildTemplateCard(item) {
     runOpenImage
   );
   placesList.prepend(newCard);
-}
-
-/* < --- DELETE CARD JS --- >*/
-export function runDeleteButton(item) {
-  item.remove();
-}
-
-/* < --- LIKE CARD JS --- >*/
-export function runCardLikeButton(event) {
-  const runButton = event.target;
-  runButton.classList.toggle("card__like-button_is-active");
-}
-
-/* < --- OPEN IMAGE POPUP JS --- >*/
-export function runOpenImage(item) {
-  popupTypeImageImage.src = item.link;
-  popupTypeImageImage.alt = item.name;
-  popupTypeImageCaption.textContent = item.name;
-  openPopup(popupTypeImage);
 }
