@@ -1,14 +1,7 @@
-/* < --- IMPORT JS --- >*/
-import { cardTemplate } from "../index.js";
-import { popupTypeImage } from "../index.js";
-import { popupTypeImageImage } from "../index.js";
-import { popupTypeImageCaption } from "../index.js";
-import { openPopup } from "./popup.js";
-import { closePopup } from "./popup.js";
-import { popupTypeNewCard } from "../index.js";
-import { popupInputNewCardName } from "../index.js";
-import { popupInputNewCardUrl } from "../index.js";
-import { placesList } from "../index.js";
+/* < --- VARIABLES --- >*/
+/* < --- template --- >*/
+const cardTemplate = document.querySelector("#card-template").content;
+export const placesList = document.querySelector(".places__list");
 
 // -----------------------------------------------------------------------------------
 
@@ -45,34 +38,4 @@ export function runDeleteButton(item) {
 export function runCardLikeButton(event) {
   const runButton = event.target;
   runButton.classList.toggle("card__like-button_is-active");
-}
-
-/* < --- OPEN IMAGE POPUP --- >*/
-export function runOpenImage(item) {
-  popupTypeImageImage.src = item.link;
-  popupTypeImageImage.alt = item.name;
-  popupTypeImageCaption.textContent = item.name;
-  openPopup(popupTypeImage);
-}
-
-// -----------------------------------------------------------------------------------
-
-/* < --- ADD NEW CARD --- >*/
-export function addCard(event) {
-  event.preventDefault();
-  const cardName = popupInputNewCardName.value;
-  const cardLink = popupInputNewCardUrl.value;
-  buildTemplateCard({ name: cardName, link: cardLink });
-  event.target.reset();
-  closePopup(popupTypeNewCard);
-}
-
-export function buildTemplateCard(item) {
-  const newCard = buildCard(
-    item,
-    runDeleteButton,
-    runCardLikeButton,
-    runOpenImage
-  );
-  placesList.prepend(newCard);
 }

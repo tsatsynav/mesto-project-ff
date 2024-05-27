@@ -1,27 +1,31 @@
 /* < --- IMPORT JS --- >*/
-import { profileTitle } from "../index.js";
-import { profileDescription } from "../index.js";
-import { popupInputTypeName } from "../index.js";
-import { popupInputTypeDescription } from "../index.js";
-import { openPopup } from "./popup.js";
-import { closePopup } from "./popup.js";
-import { popupTypeEdit } from "../index.js";
+import {
+  profileEditPopup,
+  profileNameInput,
+  profileDescriptionInput,
+  openPopup,
+  closePopup,
+} from "./popup.js";
+/* < --- VARIABLES --- >*/
+/* < --- profile --- >*/
+const profileTitle = document.querySelector(".profile__title");
+const profileDescription = document.querySelector(".profile__description");
 
 // -----------------------------------------------------------------------------------
 
 // < --- SET PROFILE INFO --- >
-export function handleFormSubmit(evt) {
+export function handleProfileFormSubmit(evt) {
   evt.preventDefault();
-  profileTitle.textContent = popupInputTypeName.value;
-  profileDescription.textContent = popupInputTypeDescription.value;
-  closePopup(popupTypeEdit);
+  profileTitle.textContent = profileNameInput.value;
+  profileDescription.textContent = profileDescriptionInput.value;
+  closePopup(profileEditPopup);
 }
 
 // -----------------------------------------------------------------------------------
 
 // < --- GET PROFILE INFO --- >
 export function getProfileInfo() {
-  popupInputTypeName.value = profileTitle.textContent;
-  popupInputTypeDescription.value = profileDescription.textContent;
-  openPopup(popupTypeEdit);
+  profileNameInput.value = profileTitle.textContent;
+  profileDescriptionInput.value = profileDescription.textContent;
+  openPopup(profileEditPopup);
 }
