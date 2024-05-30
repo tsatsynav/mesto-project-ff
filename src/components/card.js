@@ -1,11 +1,11 @@
 /* < --- VARIABLES --- >*/
 /* < --- template --- >*/
 const cardTemplate = document.querySelector("#card-template").content;
-export const placesList = document.querySelector(".places__list");
 
 // -----------------------------------------------------------------------------------
 
-/* < --- BUILD CARD --- >*/
+// < --- FUNCTIONALITY --- >
+/* < --- build card --- >*/
 export function buildCard(item, deleteFunction, likeFunction, openFunction) {
   const newCardFromTemplate = cardTemplate
     .querySelector(".card")
@@ -29,12 +29,12 @@ export function buildCard(item, deleteFunction, likeFunction, openFunction) {
   return newCardFromTemplate;
 }
 
-/* < --- DELETE CARD --- >*/
-export function runDeleteButton(item) {
+/* < --- delete card --- >*/
+export function runCardDeleteButton(item) {
   item.remove();
 }
 
-/* < --- LIKE CARD --- >*/
+/* < --- like card --- >*/
 export function runCardLikeButton(event) {
   const runButton = event.target;
   runButton.classList.toggle("card__like-button_is-active");
